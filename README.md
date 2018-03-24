@@ -21,7 +21,11 @@ Esta app requiere Node.js instalado en la maquina.
 # ejectuamos el npm install en el directorio root
 npm install 
 ```
+## Ejecutar
 
+```sh
+npm start 
+```
 ## Build
 
 La aplicacion esta basada en Electron. Se puede exportar a las distintas prataformas antes mensionadas.
