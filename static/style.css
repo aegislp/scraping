@@ -1,0 +1,110 @@
+body{
+	height: 100vh;
+    background-color: #ed5565;
+    position: relative;
+}
+ 
+h1{
+	font-size: 30px !important;
+	text-align-last: left;
+	margin: 0px;
+	color:#FFF;
+	padding: 5px 0 0 5px;
+}
+section{
+	height: 85vh;
+}
+footer{
+	font-size: 10px;
+	height: 5vh;
+	text-align: left;
+	color:#FFF;
+	background-color: rgba(0,0,0,.1);
+	padding-left: 40px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+footer span{    padding-left: 10px;}
+button.close{
+	color: #FFF;
+	position: absolute;
+    z-index: 1;
+    right: 10px;
+    top: 10px;
+}
+button.close:hover{
+	color: #FFF;
+}
+
+ol li{
+	font-size: 12px !important;
+    color: #FFF;
+}
+ol li svg{
+	stroke: #FFF;
+}
+.ac-custom svg path{
+	stroke: #FFF;
+}
+ol li label,.ac-list ol li label{
+	font-size: 12px !important;
+    color: #FFF;
+}
+.pt-page {
+	position: relative;
+}
+.pt-page h1{
+	position: relative !important;
+	top: 10px !important;
+	font-size: 2em;
+}
+.loader {
+	opacity: .9;
+}
+table{
+	margin-top: 50px;
+	background-color: rgba(113, 103, 71, 0.19);
+}
+#resultados{
+	height: 65vh;
+	display: block;
+	overflow-y: scroll;
+}
+
+.Resultados-header{
+	margin-bottom:10px; 
+	text-align: right;
+	margin-top:10px; 
+}
+
+.Resultados-header button{
+	background-color: rgba(0,0,0,.1); 
+}
+.Resultados-body{
+	margin-top: 15px;
+	font-size: 14px;
+}
+.info{
+	display: none;
+}
+
+.Titulos div{
+	padding-bottom: 12px;
+    border-bottom: 1px solid #FFF;
+}
+.Error p{
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+	font-size: 19px;
+	margin: 20px 0;
+}
+.Error div{}
+.Error span{
+    color: #FFF;
+    opacity: 0.8;
+    font-size: 95px;
+}
+.Error button{
+	    margin-top: 40px;
+}

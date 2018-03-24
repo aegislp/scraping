@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Scraping</title>
+	<link rel="stylesheet" href="./static/bootstrap.min.css">
+	<link rel="stylesheet" href="./static/loaders.min.css">
+	<link rel="stylesheet" href="./static/check.css">
+	<link rel="stylesheet" href="./static/effect.css">
+	<link rel="stylesheet" href="./static/fonts.css">
+	<link rel="stylesheet" href="./static/style.css">
+	<link rel="stylesheet" type="text/css" href="./static/default.css" />
+	<link rel="stylesheet" type="text/css" href="./static/multilevelmenu.css" />
+	<link rel="stylesheet" type="text/css" href="./static/component.css" />
+	<link rel="stylesheet" type="text/css" href="./static/animations.css" />
+</head>
+<body>
+	 
+	<button type="button" class="close" aria-label="Close" id="btn_close">
+		  		<span aria-hidden="true">&times;</span>
+			</button>
+	<div id="pt-main" class="pt-perspective ">
+		<div class="pt-page pt-page-1  pt-page-current" id="ini-page" >
+			<h1><strong> Start: </strong>Scraping</h1>
+			<section class="container-fluid d-flex justify-content-center align-items-center flex-column">
+				<div class="loader ">
+		        	<div class="pacman">
+		          		<div></div><div></div><div></div><div></div><div></div>
+		        	</div>
+		      	</div>
+	      
+				<form class="ac-custom ac-list" autocomplete="off">
+					 
+					<ol>
+						<li><input id="cb18" name="cb18" type="checkbox"><label for="cb18"><span>
+							Scrapinear CINEMALAPLATA
+						</span></label></li>
+						<li><input id="cb19" name="cb19" type="checkbox"><label for="cb19"><span>
+							Scrapinear VILLAGECINE	
+						</span></label></li>
+						 
+					<ol>
+				</form>
+		
+			</section>
+			<footer class="container-fluid d-flex justify-content-start align-items-center" id="log" ></footer>
+		</div>
+		 
+		<div class="pt-page pt-page-2 d-flex align-items-center">
+			<div id="congrats">
+				<h1 id="title"> Scraping Terminado! </h1>
+
+			</div>	 	
+		</div>
+		
+
+
+		<div class="pt-page pt-page-3 Resultados"><h1> <strong>Cinema</strong> Scraping</h1>
+			
+			<header class="Resultados-header container">
+				
+				<button class="btn btn-warning " id="saveFile" onclick="saveFile();"><span class="icon-download3"></span> CSV</button><br />
+			</header>	
+		 	<div class="Resultados-body">
+		 		<div class="container">
+				<div class="Titulos row ">
+			      <div class="col-sm-5">Titluo</div>
+			      <div class="col-sm-4">Lugar</div>
+			      <div class="col-sm-1">Hora</div>
+			      <div class="col-sm-1">Dist</div>
+			      <div class="col-sm-1">#</div>
+			    </div>
+				</div>	 
+				<div class="container" id="resultados">
+					 
+				</div>  
+
+
+		 	</div>
+			  
+				 
+			 
+			 
+		</div>
+	 
+		<div class="pt-page pt-page-5 d-flex justify-content-between align-items-center flex-column" id="error-page"> <h1><strong>Error</strong> Ups!!</h1>
+
+			<div class="Error  d-flex justify-content-between align-items-center flex-column ">
+				<span class="icon-confused2"></span>
+				<p>Ocurrio un error y la aplicacion no puede continuar</p>
+				
+				<div id="error_container">
+					
+				</div>
+				<button class="btn btn-danger" id="btn_reset">Reintentar</button>
+			</div>
+
+			<p></p>
+		</div>
+		 
+		</div>
+
+	  
+	<!-- Insert this line above script imports  -->
+<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+	<script src="./static/jquery-3.3.1.min.js"></script>
+	<script src="./static/TweenMax.min.js"></script>
+	<script src="./static/underscore-min.js"></script>
+	<script src="./static/check.js"></script>
+	<script src="./static/effect.js"></script>
+	<script src="./static/modernizr.custom.js"></script>
+	<script src="./static/jquery.dlmenu.js"></script>
+	<script src="./static/pagetransitions.js"></script>
+	<script>
+		const electron  = require('electron')
+		const {ipcRenderer} = electron;
+ 
+ 
+		function fill_table(data){
+
+
+			$.each(data,function(index,movie){
+				console.log(index,data)
+
+				var tr = $("<div>").addClass("row");
+				var info = $('<div class="info"></div>')
+				$.each(movie,function(index,campo){
+				 
+					console.log(index,campo)
+
+					$(info).append('<span class="'+index+'">'+campo+'</span>')
+				})
+				$(tr).append('<div class="col-sm-5">'+movie.titulo+'</div>')
+				$(tr).append('<div class="col-sm-4">'+movie.lugar+'</div>')
+				$(tr).append('<div class="col-sm-1">'+movie.horario+'</div>')
+				$(tr).append('<div class="col-sm-1">'+movie.distribuidora+'</div>')
+				var ulti =  $('<div class="col-sm-1 hide"></div>').append(info)
+				$(tr).append(ulti)
+			
+				$("#resultados").append(tr)
+			})
+
+
+		}
+		function init(){
+			$(".pt-page-current").removeClass("pt-page-current")
+			$("#ini-page").addClass("pt-page-current")
+			ipcRenderer.send('info:fetch')
+		}
+		(function(){
+			
+			//ipcRenderer.send('info:fetch')
+			  $(".pt-page-current").removeClass("pt-page-current")
+		    $("#error-page").addClass("pt-page-current")
+			
+			document.getElementById("btn_close").addEventListener("click", function(){
+
+				ipcRenderer.send('app:close')
+			
+			})
+
+			document.getElementById("btn_reset").addEventListener("click", function(){
+
+				init()
+			
+			})
+
+		})()
+		
+ 
+		ipcRenderer.on('log:msg', (event, msg) => {  
+		    
+		    document.getElementById("log").innerHTML = msg
+		 
+		});
+
+		ipcRenderer.on('finish:cinemalp', (event) => {  
+		    
+		    draw(document.getElementsByTagName("input")[0],'list')
+		 
+		});
+
+		ipcRenderer.on('finish:village', (event) => {  
+		    
+		    draw(document.getElementsByTagName("input")[1],'list')
+		 
+		});
+		ipcRenderer.on('finish:all', (event,data) => {  
+		    console.log(data)
+		    PageTransitions.nextPage(7)
+		    fancyPopIn()
+		   
+		    setTimeout(function() {
+		    	PageTransitions.nextPage(5)
+		    	fill_table(data)
+		    }, 3000)
+		 
+		});
+		ipcRenderer.on('error:msg', (event,msg) => {  
+		    
+		    $(".pt-page-current").removeClass("pt-page-current")
+		    $("#error-page").addClass("pt-page-current")
+		    // $("#error_container").text(JSON.stringify(msg))
+		     console.log(msg)
+		     
+		});
+
+
+		 ipcRenderer.on('save:done',(event,fine_name)=>{
+		 	new Notification('Scrapimg', {
+			    body: 'CSV guardado con exito'
+			})
+		 })
+
+		function saveFile () {
+			ipcRenderer.send('app:save')
+			
+  
+		  
+
+		}
+
+	</script>	
+</body>
+</html>
