@@ -4,7 +4,7 @@ Aplicacacion de scraping creada solamente con fines educacitvos.
 
 La aplicacion realiza scraping sobre paginas de cines para recomendar lo que estara en cartelera este semana.
 
-## Supported Platforms
+## Plataformas soportadas
 
 Scraping app soporta la siguientes platformas:
 
@@ -33,10 +33,10 @@ La aplicacion esta basada en Electron. Se puede exportar a las distintas pratafo
 ### MacOsx
  
 ```
-npm run build-mac ]
+npm run build-mac 
 ```
 ### Windows
  
 ```
-npm run build-win ]
+npm run build-win 
 ```
